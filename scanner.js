@@ -3,18 +3,20 @@ const { Scanner } = require('@yelo/hid-scanner')
 // const devices = Scanner.devices()
 // console.log(devices)
 
+let codeCallback = function(code){ console.log(`No code callback defined (received: ${code})`)}
+
 const init = function() {
-  const scanner = new Scanner('USB Device') // yeah, that how the device calls itself
+  const scanner = new Scanner('USB Device') // yeah, that how the scanner identifies itself
 
   let string = ''
   scanner.on('key', (event) => {
     const { name, char } = event
     if (!char) {
-      console.log(`Press: ${name}`)
       return
     }
     if (char === '\n') {
-      console.info(`Input: ${string}`)
+      // console.info(`Input: ${string}`)
+      codeCallback(string)
       string = ''
       return
     }
@@ -22,6 +24,11 @@ const init = function() {
   })
 }
 
+const setCodeCallback = function(cb) {
+  codeCallback = cb
+}
+
 module.exports = {
-  init
+  init,
+  setCodeCallback
 }

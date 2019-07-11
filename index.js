@@ -9,7 +9,6 @@ const nowString = (new Date).toLocaleString('de-DE', dateOptions)
 let out = ""
 
 out = printer.init()
-console.log(out)
 
 try {
 out = scanner.init()
@@ -19,13 +18,20 @@ out = scanner.init()
   process.exit(1)
 }
 
+scanner.setCodeCallback(onCodeReceived)
+
 printer.print(`
 >>> Future To Go <<<
+
 Datum: ${nowString}
 Barcodescanner: Verbunden
-Fiktionsgenerierung aktiviert.
+Fiktionsgenerierung aktiviert
+
+Bereit.
 `)
 
-console.log();
+function onCodeReceived(code) {
+  printer.print(code)
+}
 
 console.log("ready")
