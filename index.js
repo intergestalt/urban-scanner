@@ -1,3 +1,5 @@
+const { execSync } = require('child_process');
+
 const scanner = require('./scanner')
 const printer = require('./printer')
 
@@ -31,7 +33,12 @@ Bereit.
 `)
 
 function onCodeReceived(code) {
-  printer.print(code)
+  if (code === "POWEROFF") {
+    printer.print("Gerät wird heruntergefahren. Bitte warten Sie 10 Sekunden, bevor Sie den Stecker ziehen. Vielen Dank.")
+    execSync("poweroff")
+  } else {
+    printer.print(code)
+  }
 }
 
 console.log("ready")
