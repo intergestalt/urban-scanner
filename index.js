@@ -27,7 +27,7 @@ printer.print(`
 
 Datum: ${nowString}
 Barcodescanner: Verbunden
-Fiktionsgenerierung aktiviert
+Fiktionsgenerierung ist aktiv
 
 Bereit.
 `)
