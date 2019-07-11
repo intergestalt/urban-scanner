@@ -1,45 +1,31 @@
-const { Scanner } = require('@yelo/hid-scanner')
+const scanner = require('./scanner')
+const printer = require('./printer')
 
 console.log("initialising");
 
-const devices = Scanner.devices()
+const dateOptions = { }
+const nowString = (new Date).toLocaleString('de-DE', dateOptions)
 
-console.log(devices)
+let out = ""
 
-const scanner = new Scanner('USB Device')
+out = printer.init()
+console.log(out)
 
-let string = ''
-scanner.on('key', (event) => {
-  const { name, char } = event
-  if (!char) {
-    console.log(`Press: ${name}`)
-    return
-  }
-  if (char === '\n') {
-    console.info(`Input: ${string}`)
-    string = ''
-    return
-  }
-  string += char
-})
+try {
+out = scanner.init()
+} catch(error) {
+  console.log("scanner error", out, error)
+  printer.print("FEHLER Barcodescanner nicht verfügbar")
+  process.exit(1)
+}
 
+printer.print(`
+>>> Future To Go <<<
+Datum: ${nowString}
+Barcodescanner: Verbunden
+Fiktionsgenerierung aktiviert.
+`)
 
-
-
-/*return
-
-var HID = require('node-hid');
-// var devices = HID.devices();
-
-// console.log(devices)
-
-var scanner_path = "/dev/hidraw0"
-
-var handscanner = new HID.HID(scanner_path);
-
-handscanner.on("data", function(data) {
-  console.log(data.toString('utf16le'))
-});
-*/
+console.log();
 
 console.log("ready")

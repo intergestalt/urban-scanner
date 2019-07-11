@@ -1,0 +1,3 @@
+#!/bin/bash
+sudo ln ../future-to-go.service /etc/systemd/system/future-to-go.service
+sudo systemctl enable future-to-go.service

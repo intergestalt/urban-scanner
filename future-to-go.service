@@ -1,0 +1,15 @@
+[Unit]
+Description=Future to go
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/npm run machine
+WorkingDirectory=/home/pi/future-to-go
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+StartLimitIntervalSec=30
+User=root
+
+[Install]
+WantedBy=multi-user.target
