@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Barcode from 'react-barcode'
-import { generateCode } from '../../../shared.js'
+import { generateCode } from '../../../api/shared'
 
 const barcodeOptions = {
   width: 2,

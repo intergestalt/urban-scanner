@@ -7,7 +7,7 @@ const init = function() {
 }
 
 const save = function(d) {
-  fs.writeFileSync('data/data.json', JSON.stringify(d));
+  fs.writeFileSync('../data/data.json', JSON.stringify(d));
   data = d
   buildCodeList()
 }
@@ -25,7 +25,7 @@ const buildCodeList = function() {
 
 const load = function() {
   init()
-  var json = JSON.parse(fs.readFileSync('data/data.json'))
+  var json = JSON.parse(fs.readFileSync('../data/data.json'))
   if (Array.isArray(json)) {
     data = json;
     console.log("loaded data", data)

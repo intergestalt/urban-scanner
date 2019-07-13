@@ -1,5 +1,5 @@
 const storage = require('./storage.js')
-const { dateOptions } = require('./config')
+const { dateOptions } = require('../config')
 
 let currentCodes = []
 let autoResetTimer = null

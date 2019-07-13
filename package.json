@@ -5,9 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "machine": "node index_machine.js",
-    "start": "node index_web.js",
-    "dev": "PORT=3000 npm start"
+    "machine": "cd machine && npm start",
+    "start": "cd api && npm install && npm start",
+    "dev": "cd api && npm run dev",
+    "install-api": "cd api && npm install",
+    "install-machine": "cd machine && npm install"
   },
   "repository": {
     "type": "git",
@@ -19,12 +21,6 @@
     "url": "https://github.com/intergestalt/future-to-go/issues"
   },
   "homepage": "https://github.com/intergestalt/future-to-go#readme",
-  "dependencies": {
-    "@yelo/hid-scanner": "^0.2.1",
-    "blakejs": "^1.1.0",
-    "body-parser": "^1.19.0",
-    "express": "^4.17.1"
-  },
   "devDependencies": {
     "babel-preset-env": "^1.6.1"
   }

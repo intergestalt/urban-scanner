@@ -19,7 +19,7 @@ app.use(function(req, res, next) {
 });
 
 // serve static files
-app.use(express.static('./web-dev/build'))
+app.use(express.static('../web-dev/build'))
 
 // serve data
 app.get('/data/', function (req, res) {
