@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "machine": "node index.js"
+    "machine": "node index_machine.js",
+    "start": "node index_web.js"
   },
   "repository": {
     "type": "git",
@@ -18,6 +19,12 @@
   },
   "homepage": "https://github.com/intergestalt/future-to-go#readme",
   "dependencies": {
-    "@yelo/hid-scanner": "^0.2.1"
+    "@yelo/hid-scanner": "^0.2.1",
+    "blakejs": "^1.1.0",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "babel-preset-env": "^1.6.1"
   }
 }

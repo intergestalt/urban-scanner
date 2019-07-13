@@ -3,9 +3,10 @@ const { execSync } = require('child_process');
 const scanner = require('./scanner')
 const printer = require('./printer')
 
+const { dateOptions } = require('./config')
+
 console.log("initialising");
 
-const dateOptions = { }
 const nowString = (new Date).toLocaleString('de-DE', dateOptions)
 
 let out = ""

@@ -1,0 +1,77 @@
+main {
+  padding: 15px;
+  margin-top: 100px;
+}
+li {
+  list-style-type: none;
+}
+button[type="submit"] {
+  display: none;
+}
+button[disabled] {
+  opacity: 0.5;
+}
+.barcode-container {
+  display: inline-block;
+  cursor: crosshair;
+}
+
+.barcodes-container {
+  padding-right: 300px;
+}
+
+nav {
+  display: flex;
+  flex-direction: row;
+  font-size: 30px;
+  justify-content: space-between;
+  position: fixed;
+  top:0;
+  background-color: white;
+  z-index: 10;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 15px 15px 15px 15px;
+  border-width: 0 0 1px 0;
+  border-style: dotted;
+  border-color: black;
+}
+
+nav label > div {
+  margin: 15px;
+}
+
+nav label {
+  display: flex;
+  align-items: center;
+}
+
+.printout {
+  background-color: #eee;
+  font-family: monospace;
+  color: #333;
+  width: 280px;
+  font-size:18px;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.printout-container {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  height: calc( 100vh - 150px);
+  overflow: auto;
+  padding: 15px;
+}
+
+.foo input {
+  font-size: 25px;
+  padding: 10px;
+  color: black;
+}
+
+.bar .array-item {
+  width: 33.3%;
+  float: left;
+}
