@@ -8,9 +8,16 @@ li {
 button[type="submit"] {
   display: none;
 }
+
+button {
+  background-color: orange;
+}
+
 button[disabled] {
   opacity: 0.5;
+  background-color: lightgrey;
 }
+
 .barcode-container {
   display: inline-block;
   cursor: crosshair;
@@ -74,4 +81,30 @@ nav label {
 .bar .array-item {
   width: 33.3%;
   float: left;
+}
+
+.buttons {
+  display: flex;
+}
+
+.import-export {
+  display: flex;
+  flex-direction: column;
+  padding-left: 10px;
+  justify-content: space-evenly;
+}
+
+.import-export * {
+  color: #444;
+  font-weight: normal;
+  text-decoration: none;
+  font-size: 65%;
+}
+
+.import-export *:hover {
+  text-decoration: underline;
+}
+
+.import-export input {
+  display: none;
 }
