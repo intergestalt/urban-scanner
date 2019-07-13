@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 const storage = require('./storage.js')
 const core = require('./core.js')
 
+const port = process.env.PORT || 80
+
 // create express server
 var app = express()
 
@@ -40,6 +42,6 @@ app.post('/code/', function (req, res) {
   res.end(JSON.stringify(result))
 });
 
-app.listen(3000, function () {
-  console.log('API listening on port 3000!');
+app.listen(port, function () {
+  console.log('API listening on port ' + port);
 });

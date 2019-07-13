@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "machine": "node index_machine.js",
-    "start": "node index_web.js"
+    "start": "node index_web.js",
+    "dev": "PORT=3000 npm start"
   },
   "repository": {
     "type": "git",
