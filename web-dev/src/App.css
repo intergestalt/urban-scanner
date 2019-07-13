@@ -21,6 +21,18 @@ button[disabled] {
 .barcode-container {
   display: inline-block;
   cursor: crosshair;
+  position: relative;
+}
+
+.barcode-container:hover:after {
+  content: "";
+  left:0;
+  top: 44%;
+  height: 2px;
+  opacity: 0.7;
+  background-color: orangered;
+  width: 100%;
+  position: absolute;
 }
 
 .barcodes-container {
@@ -78,9 +90,13 @@ nav label {
   color: black;
 }
 
-.bar .array-item {
+.bar .array-item { /* words */
   width: 33.3%;
   float: left;
+}
+
+.bar input {
+  text-transform: uppercase;
 }
 
 .buttons {

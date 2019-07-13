@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index_web.js",
-    "dev": "PORT=3000 npm start"
+    "start": "node index_web.js"
   },
   "author": "Intergestalt",
   "license": "ISC",

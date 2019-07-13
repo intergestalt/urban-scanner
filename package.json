@@ -7,7 +7,6 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "machine": "cd machine && npm start",
     "start": "cd api && npm start",
-    "dev": "cd api && npm run dev",
     "postinstall": "npm run install-api",
     "install-api": "cd api && npm install",
     "install-machine": "cd machine && npm install"

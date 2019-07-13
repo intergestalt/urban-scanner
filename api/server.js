@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const storage = require('./storage.js')
 const core = require('./core.js')
 
-const port = process.env.PORT || 80
+const port = process.env.NODE_ENV === "production" ? 80 : 3000
 
 // create express server
 var app = express()

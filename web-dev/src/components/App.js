@@ -14,6 +14,10 @@ function beep() {
   snd.play();
 }
 
+function utf8_to_b64(str) {
+  return window.btoa(unescape(encodeURIComponent(str)));
+}
+
 class App extends React.Component {
   constructor() {
     super()
@@ -141,7 +145,7 @@ class App extends React.Component {
               import
               <input type="file" onInput={this.handleImport}/>
             </label>
-            <a href={"data:application/json;base64," + btoa(JSON.stringify(this.state.data)) } download="data.json">export</a>
+            <a href={"data:application/json;base64," + utf8_to_b64(JSON.stringify(this.state.data)) } download="data.json">export</a>
           </div>
         </div>
       </nav>

@@ -1,7 +1,7 @@
 var blake = require('blakejs')
 
 const generateCode = function(word) {
-  const hash = toHex(blake.blake2b(word, undefined, 6))
+  const hash = toHex(blake.blake2b(word.toUpperCase(), undefined, 6))
   return hash
 }
 
