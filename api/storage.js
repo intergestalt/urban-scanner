@@ -25,7 +25,12 @@ const buildCodeList = function() {
 
 const load = function() {
   init()
-  var json = JSON.parse(fs.readFileSync('../data/data.json'))
+  try {
+    var json = JSON.parse(fs.readFileSync('../data/data.json'))
+  } catch(error) {
+    console.warn(error)
+    json = {}
+  }
   if (Array.isArray(json)) {
     data = json;
     console.log("loaded data", data)
