@@ -124,3 +124,12 @@ nav label {
 .import-export input {
   display: none;
 }
+
+@media print {
+  nav {
+    display: none;
+  }
+  main {
+    margin: 0;
+  }
+}
