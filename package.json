@@ -8,7 +8,7 @@
     "machine": "cd machine && npm start",
     "start": "cd api && npm start",
     "dev": "PORT=3000 npm start",
-    "postinstall": "npm run install-api",
+    "postinstall": "npm run install-api && npm run build",
     "install-api": "cd api && npm install",
     "install-machine": "cd machine && npm install"
   },
