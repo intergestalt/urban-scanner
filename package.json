@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "machine": "cd machine && npm start",
+    "api": "cd api && npm start",
     "start": "cd api && npm start",
     "dev": "PORT=3000 npm start",
     "postinstall": "npm run install-api",

@@ -1,0 +1,3 @@
+#!/bin/bash
+sudo ln ../future-api.service /etc/systemd/system/future-api.service
+sudo systemctl enable future-api.service
