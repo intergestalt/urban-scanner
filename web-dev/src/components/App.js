@@ -165,9 +165,9 @@ class App extends React.Component {
                   data={this.state.data}
                   onInput={this.handleCodeInput}
                 />
-                <div class="printout-container">
+                <div className="printout-container">
                   { this.state.results.map( 
-                      textParts => <Printout textParts={textParts}/>
+                      textParts => <Printout key={textParts.third} textParts={textParts}/>
                   )}
                 </div>
               </div>
