@@ -2,9 +2,15 @@ main {
   padding: 15px;
   margin-top: 100px;
 }
+
 li {
   list-style-type: none;
 }
+
+p {
+  margin-bottom: 1em;
+}
+
 button[type="submit"] {
   display: none;
 }
@@ -36,7 +42,7 @@ button[disabled] {
 }
 
 .barcodes-container {
-  padding-right: 300px;
+  padding-right: 350px;
 }
 
 nav {
@@ -69,7 +75,7 @@ nav label {
   background-color: #eee;
   font-family: monospace;
   color: #333;
-  width: 280px;
+  width: 330px;
   font-size:18px;
   padding: 15px;
   margin-bottom: 15px;
