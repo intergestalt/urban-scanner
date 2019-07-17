@@ -3,6 +3,7 @@ const { execSync } = require('child_process');
 const scanner = require('./scanner')
 const printer = require('./printer')
 const fetch = require('node-fetch');
+const ip = require('ip');
 
 const { sentenceTitles, dateOptions } = require('../config')
 
@@ -24,22 +25,32 @@ out = scanner.init()
 
 scanner.setCodeCallback(onCodeReceived)
 
-const initMessage = `
+const infoMessage = function() { return `
 >>> Future To Go <<<
 
 Datum: ${nowString}
+IP: ${ ip.address() }
+SSID: ${ execSync("iwgetid wlan0 --raw") }
 Barcodescanner: Verbunden
 Fiktionsgenerierung ist aktiv
 
 Bereit.
-`
-printer.printLnLn(initMessage)
+`}
+
+const welcomeMessage = infoMessage()
+printer.printLnLn(welcomeMessage)
+console.info(welcomeMessage)
 
 function onCodeReceived(code) {
   if (code === "POWEROFF") {
-    printer.printLnLn("Gerät wird heruntergefahren. Bitte warten Sie 10 Sekunden, bevor Sie den Stecker ziehen. Vielen Dank.")
+    printer.printLnLn("Bye bye. Bitte warten Sie 10 Sekunden, bevor Sie den Stecker ziehen. Vielen Dank.")
     execSync("poweroff")
-  } else {
+  } else if (code === "INFO") {
+    printer.printLnLn(infoMessage())
+  } else if (code === "REBOOT") {
+    printer.printLnLn("Rebooting...")
+    execSync("reboot")
+  } else { 
     //printer.printLnLn(code)
 
     fetch('http://localhost/code', {
