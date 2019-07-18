@@ -7,7 +7,11 @@ let autoResetTimer = null
 const inputCode = function(code) {
   console.log("adding code", code)
   if (currentCodes.indexOf(code) === -1) { // do not add duplicates
-    currentCodes.push(code)
+    if (storage.validateCode(code)) {
+      currentCodes.push(code)
+    } else {
+      console.log("invalide code " + code)
+    }
   } else {
     console.log("ignoring code, already in list", code)
   }

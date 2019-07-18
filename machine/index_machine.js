@@ -25,7 +25,7 @@ out = scanner.init()
 
 scanner.setCodeCallback(onCodeReceived)
 
-const infoMessage = function() { return `
+const infoMessage = () => `
 >>> Future To Go <<<
 
 Datum: ${nowString}
@@ -35,7 +35,7 @@ Barcodescanner: Verbunden
 Fiktionsgenerierung ist aktiv
 
 Bereit.
-`}
+`
 
 const welcomeMessage = infoMessage()
 printer.printLnLn(welcomeMessage)
@@ -47,6 +47,8 @@ function onCodeReceived(code) {
     execSync("poweroff")
   } else if (code === "INFO") {
     printer.printLnLn(infoMessage())
+  } else if (code === "FEED") {
+    printer.printLn()
   } else if (code === "REBOOT") {
     printer.printLnLn("Rebooting...")
     execSync("reboot")
@@ -69,57 +71,72 @@ function onCodeReceived(code) {
 }
 
 const _ = {
-  bold: (n) => `\x1b\x45${n}`
+  init: () => `\x1b@`, 
+  bold: n => `\x1b\x45${n}`, // 1=bold, 0=normal
+  align: n => `\x1b\x61${n}`, // 0=left, 1=middle, 2=right
 }
 
 function printReceipt(textParts) {
 
-  printer.print(_.bold(1))
-  printer.print(textParts.timeString)
-  printer.print(_.bold(0))
+  printer.print(_.init())
+  printer.print(_.align(1))
+
+  printer.print(textParts.first)
+  printer.printLn()
+  printer.print(textParts.second)
+  printer.printLn()
+  printer.print(textParts.third)
   printer.printLn()
   printer.printLn()
 
-  printer.print(_.bold(1))
+  printer.print(_.align(0))
+
   printer.print(sentenceTitles[1])
-  printer.print(_.bold(0))
+  printer.printLn()
   printer.printLn()
   printer.print(textParts[1])
   printer.printLn()
   printer.printLn()
 
-  printer.print(_.bold(1))
   printer.print(sentenceTitles[2])
-  printer.print(_.bold(0))
+  printer.printLn()  
   printer.printLn()
   printer.print(textParts[2])
   printer.printLn()
   printer.printLn()
 
-  printer.print(_.bold(1))
   printer.print(sentenceTitles[3])
-  printer.print(_.bold(0))
   printer.printLn()
+  printer.printLn()  
   printer.print(textParts[3])
   printer.printLn()
   printer.printLn()  
 
-  printer.print(_.bold(1))
   printer.print(sentenceTitles[4])
-  printer.print(_.bold(0))
   printer.printLn()
+  printer.printLn()  
   printer.print(textParts[4])
   printer.printLn()
   printer.printLn()  
 
-  printer.print(_.bold(1))
   printer.print(sentenceTitles[5])
-  printer.print(_.bold(0))
+  printer.printLn()
   printer.printLn()
   printer.print(textParts[5])
   printer.printLn()
+  printer.printLn()
 
-  printer.printLnLn()  
+  printer.print(_.align(1))
+
+  printer.print(textParts.nexttolast)
+  printer.printLn()
+  printer.print(textParts.last)
+  printer.printLn()
+  printer.printLn()
+
+  printer.printLnLn()
+
+  printer.print(_.align(0))
 }
 
 console.log("ready")

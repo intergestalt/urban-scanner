@@ -51,9 +51,14 @@ const getScenarioByCode = function(code) {
   return data[codeList[code]]
 }
 
+const validateCode = function(code) {
+  return codeList[code] !== undefined
+}
+
 module.exports = {
   save,
   load,
   getData,
-  getScenarioByCode
+  getScenarioByCode,
+  validateCode
 }

@@ -14,6 +14,7 @@ function toHex (bytes) {
 }
 
 function generateShorthand(string) {
+  if (!string) return "_UNDEFINED"
   return string.substr(0,10).replace(/\W/g, '').toUpperCase()
 }
 
