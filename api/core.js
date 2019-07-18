@@ -1,5 +1,5 @@
 const storage = require('./storage.js')
-const { dateOptions } = require('../config')
+const { resetTimeMS, getLines } = require('../config')
 
 let currentCodes = []
 let autoResetTimer = null
@@ -15,19 +15,19 @@ const inputCode = function(code) {
     return generateTextParts()
   } else {
     if (autoResetTimer) { clearTimeout(autoResetTimer) }
-    autoResetTimer = setTimeout(resetCodes, 60000)
+    autoResetTimer = setTimeout(resetCodes, resetTimeMS)
   }
 }
 
 const generateTextParts = function() {
   console.log("codes complete, generating text", currentCodes)
   let parts = {
-    timeString: (new Date).toLocaleString('de-DE', dateOptions),
-    1: storage.getScenarioByCode(currentCodes[0]).sentences[0],
-    2: storage.getScenarioByCode(currentCodes[1]).sentences[1],
-    3: storage.getScenarioByCode(currentCodes[2]).sentences[2],
-    4: storage.getScenarioByCode(currentCodes[3]).sentences[3],
-    5: storage.getScenarioByCode(currentCodes[4]).sentences[4],
+    1: storage.getScenarioByCode(currentCodes[0]).sentences[0].toUpperCase(),
+    2: storage.getScenarioByCode(currentCodes[1]).sentences[1].toUpperCase(),
+    3: storage.getScenarioByCode(currentCodes[2]).sentences[2].toUpperCase(),
+    4: storage.getScenarioByCode(currentCodes[3]).sentences[3].toUpperCase(),
+    5: storage.getScenarioByCode(currentCodes[4]).sentences[4].toUpperCase(),
+    ...getLines(new Date)
   }
   resetCodes()
   return parts

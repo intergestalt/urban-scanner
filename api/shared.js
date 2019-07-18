@@ -1,7 +1,7 @@
 var blake = require('blakejs')
 
 const generateCode = function(word) {
-  const hash = toHex(blake.blake2b(word.toUpperCase(), undefined, 6))
+  const hash = toHex(blake.blake2b(word.toUpperCase(), undefined, 5))
   return hash
 }
 
@@ -13,6 +13,11 @@ function toHex (bytes) {
   }).join('')
 }
 
+function generateShorthand(string) {
+  return string.substr(0,10).replace(/\W/g, '').toUpperCase()
+}
+
 module.exports = {
-  generateCode
+  generateCode,
+  generateShorthand
 }

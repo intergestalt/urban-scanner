@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Barcode from 'react-barcode'
-import { generateCode } from '../../../api/shared'
+import { generateCode, generateShorthand } from '../../../api/shared'
 
 const barcodeOptions = {
   width: 2,
@@ -22,22 +22,38 @@ const barcodeOptions = {
   marginRight: undefined
 }
 
-export default function(props) {
-  console.log(props)
+export default class extends React.Component {
 
-  const listItems =  props.data.map( item => {
-    return <li key={item.title}>
-      <h3>{ item.title }</h3>
-      { item.words.map( word => {
-        if (word) {
-          const code = generateCode(word)
-          return <div onClick={event => props.onInput(code)} className="barcode-container">
-              <Barcode key={code} value={code} options={barcodeOptions} text={word} />
-            </div>
-        }
-      }) }
-    </li>
-  })
+  listItems() {
+    const props = this.props
 
-  return <ul className="barcodes-container">{ listItems }</ul>
+    return props.data.map( item => {
+      return <li key={item.title}>
+        <h3>{ item.title }</h3>
+        { item.words.map( word => {
+          let shorthand = generateShorthand(item.title)
+          if (word) {
+            const code = generateCode(word)
+            return <div 
+              key={code} 
+              onClick={event => props.onInput(code)} 
+              className="barcode-container"
+              data-idea={shorthand}
+              >
+                <Barcode 
+                  key={code} 
+                  value={code} 
+                  options={barcodeOptions} 
+                  text={word}
+                />
+              </div>
+          }
+        }) }
+      </li>
+    })
+  }
+
+  render() {
+    return <ul className="barcodes-container">{ this.listItems() }</ul>
+  }
 }

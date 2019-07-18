@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import {saveSvgAsPng} from 'save-svg-as-png'
+import { generateShorthand } from '../../../api/shared'
 import Editor from './Editor.js'
 import Barcodes from './Barcodes.js'
 import Printout from './Printout.js'
@@ -102,6 +104,15 @@ class App extends React.Component {
     reader.readAsText(file)
   }
 
+  handleDownload() {
+    let elem = Array.from(document.querySelectorAll(".barcode-container")).forEach( elem => {
+      let svg = elem.querySelector("svg")
+      let word = generateShorthand(elem.querySelector('text').textContent)
+      let idea = elem.dataset.idea
+      saveSvgAsPng(svg, idea + "_" + word + ".png");
+    })  
+  }
+
   componentDidMount() {
     var xmlhttp = new XMLHttpRequest();
     var url = host + "/data/";
@@ -125,28 +136,30 @@ class App extends React.Component {
 
   render() {
     
-    const saveButton = <button disabled={!this.state.changed} onClick={this.handleSave}>Speichern</button>
-    
+    const saveButton = <button key="save" disabled={!this.state.changed} onClick={this.handleSave}>Speichern</button>
+    const importExport = <div key="importexport" className="import-export">
+        <label>
+          import
+          <input type="file" onInput={this.handleImport}/>
+        </label>
+        <a href={"data:application/json;base64," + utf8_to_b64(JSON.stringify(this.state.data)) } download="data.json">export</a>
+      </div>
+    const download = <button onClick={this.handleDownload}>Download</button>
+
     return <div>
       <nav>
         <h1>Future To Go</h1>
         <label>
           <span>Edit</span>
           <Toggle
-            defaultChecked={this.state.tofuIsReady}
             icons={false}
             onChange={this.handleNavChange} />
           <span>Test</span>
         </label>
         <div className="buttons">
-          { saveButton }
-          <div className="import-export">
-            <label>
-              import
-              <input type="file" onInput={this.handleImport}/>
-            </label>
-            <a href={"data:application/json;base64," + utf8_to_b64(JSON.stringify(this.state.data)) } download="data.json">export</a>
-          </div>
+          { this.state.page === "edit" ?
+            [ saveButton, importExport ]
+          : download }
         </div>
       </nav>
       <main>
@@ -165,9 +178,9 @@ class App extends React.Component {
                   data={this.state.data}
                   onInput={this.handleCodeInput}
                 />
-                <div class="printout-container">
+                <div className="printout-container">
                   { this.state.results.map( 
-                      textParts => <Printout textParts={textParts}/>
+                      textParts => <Printout key={textParts.third} textParts={textParts}/>
                   )}
                 </div>
               </div>
