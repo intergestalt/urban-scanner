@@ -12,11 +12,11 @@ export default function(props) {
       {p.second}<br/>
       {p.third}
     </p>
-    <p>{sentenceTitles[1]}</p><p>{p[1]}</p>
-    <p>{sentenceTitles[2]}</p><p>{p[2]}</p>
-    <p>{sentenceTitles[3]}</p><p>{p[3]}</p>
-    <p>{sentenceTitles[4]}</p><p>{p[4]}</p>
-    <p>{sentenceTitles[5]}</p><p>{p[5]}</p>
+    <p><b>{sentenceTitles[1]}</b></p><p>{p[1]}</p>
+    <p><b>{sentenceTitles[2]}</b></p><p>{p[2]}</p>
+    <p><b>{sentenceTitles[3]}</b></p><p>{p[3]}</p>
+    <p><b>{sentenceTitles[4]}</b></p><p>{p[4]}</p>
+    <p><b>{sentenceTitles[5]}</b></p><p>{p[5]}</p>
     <p style={{textAlign: "center"}}>
       {p.nexttolast}<br/>
       {p.last}

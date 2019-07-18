@@ -11,11 +11,13 @@ const sentenceTitles = {
 const weekdays = ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"]
 
 const getLines = date => ({
+  header: "----- 5 BARCODES SCANNEN -----",
   first: "*** Fiction Forum ***".toUpperCase(),
   second: "F-U-T-U-R-E T-O G-O",
   third: dateFormat(date, "XX dd.mm.yyyy HH:MM").replace("XX", XX => weekdays[date.getDay()]).toUpperCase(),
   nexttolast: "***",
-  last: "Mit voranschreitender Zukunft\nwird dieser Ausdruck\nverblassen...".toUpperCase()
+  last: "Mit voranschreitender Zukunft\nwird dieser Ausdruck\nverblassen...".toUpperCase(),
+  footer: "_______ HIER ABTRENNEN _______"
 })
 
 const resetTimeMS = 60000

@@ -5,7 +5,17 @@ const printer = require('./printer')
 const fetch = require('node-fetch');
 const ip = require('ip');
 
-const { sentenceTitles, dateOptions } = require('../config')
+const { sentenceTitles, dateOptions, getLines } = require('../config')
+
+const _ = {
+  init: () => `\x1b@`, 
+  bold: n => `\x1b\x45${n}`, // 1=bold, 0=normal
+  align: n => `\x1b\x61${n}`, // 0=left, 1=middle, 2=right
+}
+
+const lines = getLines(new Date())
+
+let headerTimeout = null
 
 console.log("initialising");
 
@@ -39,6 +49,9 @@ Bereit.
 
 const welcomeMessage = infoMessage()
 printer.printLnLn(welcomeMessage)
+printFooter()
+headerTimeout = setTimeout(printHeader, 20000)
+
 console.info(welcomeMessage)
 
 function onCodeReceived(code) {
@@ -64,16 +77,12 @@ function onCodeReceived(code) {
     .then(json => {
       const textParts = (json && json[1]) ? json : null
       if (textParts) {
+        if (headerTimeout) clearTimeout(headerTimeout)
         printReceipt(textParts)
+        headerTimeout = setTimeout(printHeader, 60000)
       }    
     });
   }
-}
-
-const _ = {
-  init: () => `\x1b@`, 
-  bold: n => `\x1b\x45${n}`, // 1=bold, 0=normal
-  align: n => `\x1b\x61${n}`, // 0=left, 1=middle, 2=right
 }
 
 function printReceipt(textParts) {
@@ -91,35 +100,45 @@ function printReceipt(textParts) {
 
   printer.print(_.align(0))
 
+  printer.print(_.bold(1))
   printer.print(sentenceTitles[1])
+  printer.print(_.bold(0))
   printer.printLn()
   printer.printLn()
   printer.print(textParts[1])
   printer.printLn()
   printer.printLn()
 
+  printer.print(_.bold(1))
   printer.print(sentenceTitles[2])
+  printer.print(_.bold(0))
   printer.printLn()  
   printer.printLn()
   printer.print(textParts[2])
   printer.printLn()
   printer.printLn()
 
+  printer.print(_.bold(1))
   printer.print(sentenceTitles[3])
+  printer.print(_.bold(0))
   printer.printLn()
   printer.printLn()  
   printer.print(textParts[3])
   printer.printLn()
   printer.printLn()  
 
+  printer.print(_.bold(1))
   printer.print(sentenceTitles[4])
+  printer.print(_.bold(0))
   printer.printLn()
   printer.printLn()  
   printer.print(textParts[4])
   printer.printLn()
   printer.printLn()  
 
+  printer.print(_.bold(1))
   printer.print(sentenceTitles[5])
+  printer.print(_.bold(0))
   printer.printLn()
   printer.printLn()
   printer.print(textParts[5])
@@ -133,10 +152,31 @@ function printReceipt(textParts) {
   printer.print(textParts.last)
   printer.printLn()
   printer.printLn()
-
-  printer.printLnLn()
+  printer.printLn()
 
   printer.print(_.align(0))
+}
+
+function printHeader() {
+  printer.print(_.init())
+  printer.print(_.align(1))
+
+  printer.printLn()
+  printer.print(lines.header)
+  printer.printLn()
+  printer.printLn()
+  printer.printLnLn()  
+
+  printer.print(_.align(1))
+}
+
+function printFooter() {
+  printer.print(_.align(1))
+  printer.print(lines.footer)
+  printer.print(_.align(0))
+  printer.printLn()
+
+  printer.printLnLn()  
 }
 
 console.log("ready")

@@ -1,5 +1,8 @@
+const wrap = require('word-wrap');
 const storage = require('./storage.js')
 const { resetTimeMS, getLines } = require('../config')
+
+const lineWrapWidth = 32
 
 let currentCodes = []
 let autoResetTimer = null
@@ -15,10 +18,10 @@ const inputCode = function(code) {
   } else {
     console.log("ignoring code, already in list", code)
   }
+  if (autoResetTimer) { clearTimeout(autoResetTimer) }
   if (currentCodes.length >= 5) {
     return generateTextParts()
   } else {
-    if (autoResetTimer) { clearTimeout(autoResetTimer) }
     autoResetTimer = setTimeout(resetCodes, resetTimeMS)
   }
 }
@@ -26,13 +29,17 @@ const inputCode = function(code) {
 const generateTextParts = function() {
   console.log("codes complete, generating text", currentCodes)
   let parts = {
-    1: storage.getScenarioByCode(currentCodes[0]).sentences[0].toUpperCase(),
-    2: storage.getScenarioByCode(currentCodes[1]).sentences[1].toUpperCase(),
-    3: storage.getScenarioByCode(currentCodes[2]).sentences[2].toUpperCase(),
-    4: storage.getScenarioByCode(currentCodes[3]).sentences[3].toUpperCase(),
-    5: storage.getScenarioByCode(currentCodes[4]).sentences[4].toUpperCase(),
+    1: storage.getScenarioByCode(currentCodes[0]).sentences[0]/*.toUpperCase()*/,
+    2: storage.getScenarioByCode(currentCodes[1]).sentences[1]/*.toUpperCase()*/,
+    3: storage.getScenarioByCode(currentCodes[2]).sentences[2]/*.toUpperCase()*/,
+    4: storage.getScenarioByCode(currentCodes[3]).sentences[3]/*.toUpperCase()*/,
+    5: storage.getScenarioByCode(currentCodes[4]).sentences[4]/*.toUpperCase()*/,
     ...getLines(new Date)
   }
+  for (let key in parts) {
+    parts[key] = wrap( parts[key], { width: lineWrapWidth, indent:"", trim: true, cut: true } )
+  }
+  console.log(parts)
   resetCodes()
   return parts
 }
