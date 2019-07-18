@@ -15,7 +15,7 @@ const getLines = date => ({
   second: "F-U-T-U-R-E T-O G-O",
   third: dateFormat(date, "XX dd.mm.yyyy HH:MM").replace("XX", XX => weekdays[date.getDay()]).toUpperCase(),
   nexttolast: "***",
-  last: "Mit voranschreitender Zukunft wird dieser Ausdruck verblassen...".toUpperCase()
+  last: "Mit voranschreitender Zukunft\nwird dieser Ausdruck\nverblassen...".toUpperCase()
 })
 
 const resetTimeMS = 60000
