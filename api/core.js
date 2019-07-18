@@ -37,7 +37,7 @@ const generateTextParts = function() {
     ...getLines(new Date)
   }
   for (let key in parts) {
-    parts[key] = wrap( parts[key], { width: lineWrapWidth, indent:"", trim: true, cut: true } )
+    parts[key] = wrap( parts[key], { width: lineWrapWidth, indent:"", trim: true } )
   }
   console.log(parts)
   resetCodes()

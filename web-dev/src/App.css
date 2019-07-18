@@ -79,6 +79,8 @@ nav label {
   font-size:18px;
   padding: 15px;
   margin-bottom: 15px;
+  white-space: pre-wrap;
+  font-size: 14.8px;
 }
 
 .printout-container {
@@ -88,7 +90,6 @@ nav label {
   height: calc( 100vh - 150px);
   overflow: auto;
   padding: 15px;
-  word-break: break-all;
 }
 
 .foo input {
