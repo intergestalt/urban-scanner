@@ -13,6 +13,11 @@ function toHex (bytes) {
   }).join('')
 }
 
+function generateShorthand(string) {
+  return string.substr(0,10).replace(/\W/g, '').toUpperCase()
+}
+
 module.exports = {
-  generateCode
+  generateCode,
+  generateShorthand
 }

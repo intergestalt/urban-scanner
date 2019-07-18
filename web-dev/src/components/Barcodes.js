@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import {saveSvgAsPng} from 'save-svg-as-png'
 import Barcode from 'react-barcode'
-import { generateCode } from '../../../api/shared'
+import { generateCode, generateShorthand } from '../../../api/shared'
 
 const barcodeOptions = {
   width: 2,
@@ -25,13 +24,6 @@ const barcodeOptions = {
 
 export default class extends React.Component {
 
-  componentDidMount() {
-    //let elem = document.getElementsByTagName("svg")[0]
-    //saveSvgAsPng(elem, "barcode.png");
-    //elem = document.getElementsByTagName("svg")[1]
-    //saveSvgAsPng(elem, "barcode3.png");    
-  }
-
   listItems() {
     const props = this.props
 
@@ -39,9 +31,15 @@ export default class extends React.Component {
       return <li key={item.title}>
         <h3>{ item.title }</h3>
         { item.words.map( word => {
+          let shorthand = generateShorthand(item.title)
           if (word) {
             const code = generateCode(word)
-            return <div onClick={event => props.onInput(code)} className="barcode-container">
+            return <div 
+              key={code} 
+              onClick={event => props.onInput(code)} 
+              className="barcode-container"
+              data-idea={shorthand}
+              >
                 <Barcode 
                   key={code} 
                   value={code} 

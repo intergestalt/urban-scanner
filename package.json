@@ -12,6 +12,7 @@
     "postinstall": "npm run install-api",
     "install-api": "cd api && npm install",
     "install-machine": "cd machine && npm install"
+    "build-web": "cd web-dev && npm run build"
   },
   "repository": {
     "type": "git",
@@ -24,9 +25,13 @@
   },
   "homepage": "https://github.com/intergestalt/future-to-go#readme",
   "devDependencies": {
-    "babel-preset-env": "^1.6.1"
+    "babel-preset-env": "^1.6.1",
+    "pre-commit": "^1.2.2"
   },
   "dependencies": {
     "dateformat": "^3.0.3"
-  }
+  },
+  "pre-commit": [
+    "build-web"
+  ]  
 }
