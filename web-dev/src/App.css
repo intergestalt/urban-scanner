@@ -88,6 +88,7 @@ nav label {
   height: calc( 100vh - 150px);
   overflow: auto;
   padding: 15px;
+  word-break: break-all;
 }
 
 .foo input {

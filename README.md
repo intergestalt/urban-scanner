@@ -23,3 +23,7 @@ both services for machine and api need to be installed. there are install script
 **npm run dev** in **/** to run the api on local port
 
 **cd web-dev && npm run dev** to run the web dev environment with hot reload. remember to run **npm run build** after modifications and to check in the build
+
+### sshfs
+
+````sudo sshfs -o allow_other,defer_permissions pi@future-to-go.local:/ raspi````
