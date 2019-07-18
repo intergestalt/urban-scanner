@@ -9,7 +9,7 @@
     "api": "cd api && npm start",
     "start": "cd api && npm start",
     "dev": "cd api && npm run dev",
-    "postinstall": "npm run install-api",
+    "postinstall": "npm run install-api && install-web",
     "install-api": "cd api && npm install",
     "install-machine": "cd machine && npm install",
     "install-web": "cd web-dev && npm install",
