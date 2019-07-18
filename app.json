@@ -1,7 +1,0 @@
-{
-  "scripts": {
-    "dokku": {
-      "predeploy": "cd /app && npm run build-web"
-    }
-  }
-}
