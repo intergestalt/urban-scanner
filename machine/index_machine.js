@@ -176,7 +176,7 @@ function printFooter() {
   printer.print(_.align(0))
   printer.printLn()
 
-  printer.printLnLn()  
+  printer.printFeedSharp()  
 }
 
 console.log("ready")

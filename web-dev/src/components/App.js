@@ -105,11 +105,13 @@ class App extends React.Component {
   }
 
   handleDownload() {
-    let elem = Array.from(document.querySelectorAll(".barcode-container")).forEach( elem => {
-      let svg = elem.querySelector("svg")
-      let word = generateShorthand(elem.querySelector('text').textContent)
-      let idea = elem.dataset.idea
-      saveSvgAsPng(svg, idea + "_" + word + ".png");
+    let elem = Array.from(document.querySelectorAll(".barcode-container")).forEach( (elem, index) => {
+      setTimeout( () => {
+        let svg = elem.querySelector("svg")
+        let word = generateShorthand(elem.querySelector('text').textContent)
+        let idea = elem.dataset.idea
+        saveSvgAsPng(svg, idea + "_" + word + ".png");
+      }, index * 250)
     })  
   }
 
