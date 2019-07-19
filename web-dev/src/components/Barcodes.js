@@ -8,7 +8,7 @@ const barcodeOptions = {
   format: "CODE128",
   displayValue: true,
   fontOptions: "",
-  font: "monospace",
+  font: "receipt, monospace",
   textAlign: "center",
   textPosition: "top",
   textMargin: 6,
@@ -35,7 +35,7 @@ export default class extends React.Component {
       let textNode = document.createElementNS("http://www.w3.org/2000/svg", "text");
       const item = this.props.data.find( item => generateShorthand(item.title) === idea)
       textNode.innerHTML = item.title.toUpperCase()
-      textNode.setAttribute("style","font: 20px monospace")
+      textNode.setAttribute("style","font: 20px receipt, monospace")
       textNode.setAttribute("text-anchor", "middle")
       textNode.setAttribute("x",otherText.getAttribute("x"))
       textNode.setAttribute("y", 160 - offsetY)
