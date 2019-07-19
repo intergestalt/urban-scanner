@@ -10,30 +10,70 @@ const barcodeOptions = {
   fontOptions: "",
   font: "monospace",
   textAlign: "center",
-  textPosition: "bottom",
-  textMargin: 2,
-  fontSize: 20,
+  textPosition: "top",
+  textMargin: 6,
+  fontSize: 30,
   background: "#ffffff",
   lineColor: "#000000",
   margin: 10,
-  marginTop: undefined,
-  marginBottom: undefined,
+  marginTop: 10,
+  marginBottom: 35,
   marginLeft: undefined,
   marginRight: undefined
 }
 
 export default class extends React.Component {
 
+  componentDidMount() {
+    const containers = document.querySelectorAll(".barcode-container")
+    containers.forEach( container => {
+      const idea = container.getAttribute("data-idea")
+      const parent = container.querySelectorAll("svg > g")[0]
+      const otherText = parent.querySelector("text")
+      const transformY = parseInt(parent.getAttribute("transform").match(/\d+/g)[1])
+      const offsetY = transformY - barcodeOptions.marginTop
+      let textNode = document.createElementNS("http://www.w3.org/2000/svg", "text");
+      const item = this.props.data.find( item => generateShorthand(item.title) === idea)
+      textNode.innerHTML = item.title.toUpperCase()
+      textNode.setAttribute("style","font: 20px monospace")
+      textNode.setAttribute("text-anchor", "middle")
+      textNode.setAttribute("x",otherText.getAttribute("x"))
+      textNode.setAttribute("y", 160 - offsetY)
+      console.log(textNode)
+      parent.appendChild(textNode)
+  
+    })
+  }
+
+  collisionWarning(data) {
+    if (!data) return null
+    let words = []
+    for ( let item of data) {
+      for (let word of item.words) {
+        if (word) {
+          if (words.indexOf(word) > -1) {
+            return <h1 style={{color:"red"}}> WORD COLLISION WARNING: {word}</h1>
+          }
+          words.push(word)
+        }
+      }
+    }
+    return null
+  }
+
   listItems() {
     const props = this.props
 
     return props.data.map( item => {
       return <li key={item.title}>
-        <h3>{ item.title }</h3>
+        {/* <h3>{ item.title }</h3> */}
         { item.words.map( word => {
           let shorthand = generateShorthand(item.title)
           if (word) {
             const code = generateCode(word)
+            const fontSize = barcodeOptions.fontSize * (word.length > 15 ? 0.7 : 1 )
+            const textMargin = barcodeOptions.textMargin * (word.length > 15 ? 1 : 1 )
+            const marginTop = barcodeOptions.marginTop * (word.length > 15 ? 1.8 : 1 )
             return <div 
               key={code} 
               onClick={event => props.onInput(code)} 
@@ -43,7 +83,10 @@ export default class extends React.Component {
                 <Barcode 
                   key={code} 
                   value={code} 
-                  options={barcodeOptions} 
+                  {...barcodeOptions} 
+                  fontSize={fontSize}
+                  textMargin={textMargin}
+                  marginTop={marginTop}
                   text={word}
                 />
               </div>
@@ -54,6 +97,17 @@ export default class extends React.Component {
   }
 
   render() {
-    return <ul className="barcodes-container">{ this.listItems() }</ul>
+    return <div>
+      { this.collisionWarning(this.props.data) }
+      <ul className="barcodes-container">{ this.listItems() }</ul>
+      </div>
+  }
+}
+
+function findByShorthand(collection, shorthand) {
+  for (let c of collection) {
+    if (generateShorthand(c) === shorthand) {
+      return c
+    }
   }
 }

@@ -28,6 +28,7 @@ button[disabled] {
   display: inline-block;
   cursor: crosshair;
   position: relative;
+  border: dashed 1px grey;
 }
 
 .barcode-container:hover:after {
@@ -139,5 +140,8 @@ nav label {
   }
   main {
     margin: 0;
+  }
+  .barcode-container {
+    border: none;
   }
 }
