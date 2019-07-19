@@ -150,9 +150,7 @@ function printReceipt(textParts) {
   printer.print(textParts.nexttolast)
   printer.printLn()
   printer.print(textParts.last)
-  printer.printLn()
-  printer.printLn()
-  printer.printLn()
+  printer.printLnLn()
 
   printer.print(_.align(0))
 }
@@ -163,7 +161,6 @@ function printHeader() {
 
   printer.printLn()
   printer.print(lines.header)
-  printer.printLn()
   printer.printLn()
   printer.printLnLn()  
 

@@ -26,11 +26,11 @@ const printLn = function(text = "", style={}) {
 }
 
 const printLnLn = function(text = "", style={}) {
-  return print(text + "\n\n\n\n\n\n\n")
+  return print(text + "\n\n\n\n\n\n\n\n")
 }
 
 const printFeedSharp = function(text = "", style={}) {
-  return print(text + "\n\n\n")
+  return print(text + "\n\n\n\n")
 }
 
 module.exports = {
