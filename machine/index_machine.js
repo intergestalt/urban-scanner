@@ -150,6 +150,7 @@ function printReceipt(textParts) {
   printer.print(textParts.nexttolast)
   printer.printLn()
   printer.print(textParts.last)
+  printer.printLn()
   printer.printLnLn()
 
   printer.print(_.align(0))
