@@ -21,5 +21,8 @@ export default function(props) {
       {p.nexttolast}<br/>
       {p.last}
     </p>
+    <p>
+      {p.announcement}
+    </p>
   </div>
 }

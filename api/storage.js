@@ -8,13 +8,13 @@ const init = function() {
 
 const save = function(d) {
   fs.writeFileSync('../data/data.json', JSON.stringify(d));
-  data = d
-  buildCodeList()
+  load()
 }
 
 const buildCodeList = function() {
   let tmp = {}
-  data.forEach( (item, index) => {
+  const fictions = data.fictions || data
+  fictions.forEach( (item, index) => {
     item.words.forEach( word => {
       if (word) { tmp[generateCode(word)] = index }
     })
@@ -32,6 +32,10 @@ const load = function() {
     json = {}
   }
   if (Array.isArray(json)) {
+    console.warn("converting old data format")
+    json.fictions = json
+  }
+  if (json.fictions && Array.isArray(json.fictions)) {
     data = json;
     console.log("loaded data", data)
     buildCodeList()
@@ -48,7 +52,7 @@ const getScenarioByCode = function(code) {
   // console.log("code", code)
   // console.log("index",codeList[code] )
   // console.log("scenario", data[codeList[code]])
-  return data[codeList[code]]
+  return data.fictions[codeList[code]]
 }
 
 const validateCode = function(code) {

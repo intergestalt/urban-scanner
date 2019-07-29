@@ -34,6 +34,7 @@ const generateTextParts = function() {
     3: storage.getScenarioByCode(currentCodes[2]).sentences[2]/*.toUpperCase()*/,
     4: storage.getScenarioByCode(currentCodes[3]).sentences[3]/*.toUpperCase()*/,
     5: storage.getScenarioByCode(currentCodes[4]).sentences[4]/*.toUpperCase()*/,
+    announcement: storage.getData().announcement,
     ...getLines(new Date)
   }
   for (let key in parts) {

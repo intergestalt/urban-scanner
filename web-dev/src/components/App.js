@@ -96,8 +96,13 @@ class App extends React.Component {
     reader.onload = ( content => {
       var jsonString = content.target.result
       console.log(jsonString)
+      let data = JSON.parse(jsonString)
+      if (Array.isArray(data)) {
+        console.warn("converting old data")
+        data.fictions = data
+      }
       this.setState({
-        data: JSON.parse(jsonString),
+        data,
         changed: true
       })
     })
@@ -124,8 +129,11 @@ class App extends React.Component {
       console.log(this)
       if (this.readyState == 4 && this.status == 200) {
         var data = JSON.parse(this.responseText);
-        if (Array.isArray(data)) {
-          setState({ data })  
+        if (Array.isArray(data)) { // old style data json
+          console.log("converting old data")
+          setState({ data: { fictions: data } })  
+        } else if (data.fictions && Array.isArray(data.fictions)) {
+          setState({data})
         }
         setState({ loading: false })
         console.log("loaded data")
@@ -177,7 +185,7 @@ class App extends React.Component {
             :
               <div>
                 <Barcodes 
-                  data={this.state.data}
+                  data={this.state.data.fictions}
                   onInput={this.handleCodeInput}
                 />
                 <div className="printout-container">
