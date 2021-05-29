@@ -158,7 +158,7 @@ class App extends React.Component {
 
     return <div>
       <nav>
-        <h1>Future To Go</h1>
+        <h1>ÜBER Urbane Praxis</h1>
         <label>
           <span>Edit</span>
           <Toggle

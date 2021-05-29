@@ -36,13 +36,13 @@ out = scanner.init()
 scanner.setCodeCallback(onCodeReceived)
 
 const infoMessage = () => `
->>> Future To Go <<<
+>>> ÜBER Urbane Praxis <<<
 
 Datum: ${nowString}
 IP: ${ ip.address() }
 SSID: ${ execSync("iwgetid wlan0 --raw") }
 Barcodescanner: Verbunden
-Fiktionsgenerierung ist aktiv
+Persönlichkeitsgenerierung ist aktiv
 
 Bereit.
 `
