@@ -170,6 +170,12 @@ function printReceipt(textParts) {
   printer.print(textParts.coordinates)
   printer.printLn()
   printer.printLn()
+
+  printer.printLn()
+  printer.printLn()
+  printer.printLn()
+  printer.printLn()
+  printFooter()
 }
 
 function printHeader() {
