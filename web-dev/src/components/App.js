@@ -79,7 +79,7 @@ class App extends React.Component {
       },
       body, 
     }).then(res => res.json())
-    .then(data => {console.log(data); if (data[1]) setState({ results: [data].concat(this.state.results)})})
+    .then(data => {console.log(data); if (data.uid) setState({ results: [data].concat(this.state.results)})})
     .catch(error => console.error(error));
   }
 
@@ -190,7 +190,7 @@ class App extends React.Component {
                 />
                 <div className="printout-container">
                   { this.state.results.map( 
-                      textParts => <Printout key={textParts.third} textParts={textParts}/>
+                      textParts => <Printout key={textParts.uid} textParts={textParts}/>
                   )}
                 </div>
               </div>

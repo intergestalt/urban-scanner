@@ -7,22 +7,31 @@ export default function(props) {
   if (!p) return null
 
   return <div className="printout">
-    <p style={{textAlign: "center"}}>
-      {p.first}<br/>
-      {p.second}<br/>
-      {p.third}
+    <p style={{textAlign: "left"}}>
+      <b>{p.intro1}</b><br/>
+      {p.intro2}<br /><br />
+      <b>{p.fiction1Title}</b><br />
+      {p.fiction1Text}<br /><br />
+      <b>{p.fiction2Title}</b><br />
+      {p.fiction2Text}<br /><br />
+      <b>{p.fiction3Title}</b><br />
+      {p.fiction3Text}<br /><br />
     </p>
-    <p><b>{sentenceTitles[1]}</b></p><p>{p[1]}</p>
-    <p><b>{sentenceTitles[2]}</b></p><p>{p[2]}</p>
-    <p><b>{sentenceTitles[3]}</b></p><p>{p[3]}</p>
-    <p><b>{sentenceTitles[4]}</b></p><p>{p[4]}</p>
-    <p><b>{sentenceTitles[5]}</b></p><p>{p[5]}</p>
+    <p>
+      {p.mid}<br />
+    </p>
+    <p>
+      <b>{p.personalityTitle}</b><br />
+      {p.personalityText}<br />
+    </p>
     <p style={{textAlign: "center"}}>
-      {p.nexttolast}<br/>
       {p.last}
     </p>
     <p>
-      {p.announcement}
+      {p.end}<br /><br />
+    </p>
+    <p>
+      {p.date} {p.coordinates}<br />
     </p>
   </div>
 }

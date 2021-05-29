@@ -14,11 +14,9 @@ const save = function(d) {
 const buildCodeList = function() {
   let tmp = {}
   const fictions = data.fictions || data
-  fictions.forEach( (item, index) => {
-    item.words.forEach( word => {
-      if (word) { tmp[generateCode(word)] = index }
-    })
-  });
+  fictions.forEach( (fiction, index) => 
+    tmp[generateCode(fiction.code)] = index
+  );
   codeList = tmp
   console.log("generated code list", codeList)
 }
@@ -30,10 +28,6 @@ const load = function() {
   } catch(error) {
     console.warn(error)
     json = {}
-  }
-  if (Array.isArray(json)) {
-    console.warn("converting old data format")
-    json.fictions = json
   }
   if (json.fictions && Array.isArray(json.fictions)) {
     data = json;

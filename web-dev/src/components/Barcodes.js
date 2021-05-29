@@ -32,7 +32,7 @@ export default class extends React.Component {
       const otherText = parent.querySelector("text")
       const transformY = parseInt(parent.getAttribute("transform").match(/\d+/g)[1])
       const offsetY = transformY - barcodeOptions.marginTop
-      let textNode = document.createElementNS("http://www.w3.org/2000/svg", "text");
+      /*let textNode = document.createElementNS("http://www.w3.org/2000/svg", "text");
       const item = this.props.data.find( item => generateShorthand(item.title) === idea)
       textNode.innerHTML = item.title.toUpperCase()
       textNode.setAttribute("style","font: 20px receipt, monospace")
@@ -41,6 +41,7 @@ export default class extends React.Component {
       textNode.setAttribute("y", 160 - offsetY)
       console.log(textNode)
       parent.appendChild(textNode)
+      */
   
     })
   }
@@ -61,44 +62,51 @@ export default class extends React.Component {
     return null
   }
 
+  renderBarcode(word) {
+    {
+      let shorthand = generateShorthand(word)
+      if (word) {
+        const code = generateCode(word)
+        const fontSize = barcodeOptions.fontSize * (word.length > 15 ? 0.7 : 1)
+        const textMargin = barcodeOptions.textMargin * (word.length > 15 ? 1 : 1)
+        const marginTop = barcodeOptions.marginTop * (word.length > 15 ? 1.8 : 1)
+        return <div
+          key={code}
+          onClick={event => this.props.onInput(code)}
+          className="barcode-container"
+          data-idea={shorthand}
+        >
+          <Barcode
+            key={code}
+            value={code}
+            {...barcodeOptions}
+            fontSize={fontSize}
+            textMargin={textMargin}
+            marginTop={marginTop}
+            text={word}
+          />
+        </div>
+      }
+    }
+  }
+
   listItems() {
     const props = this.props
+
+    console.log(props)
 
     return props.data.map( item => {
       return <li key={item.title}>
         {/* <h3>{ item.title }</h3> */}
-        { item.words.map( word => {
-          let shorthand = generateShorthand(item.title)
-          if (word) {
-            const code = generateCode(word)
-            const fontSize = barcodeOptions.fontSize * (word.length > 15 ? 0.7 : 1 )
-            const textMargin = barcodeOptions.textMargin * (word.length > 15 ? 1 : 1 )
-            const marginTop = barcodeOptions.marginTop * (word.length > 15 ? 1.8 : 1 )
-            return <div 
-              key={code} 
-              onClick={event => props.onInput(code)} 
-              className="barcode-container"
-              data-idea={shorthand}
-              >
-                <Barcode 
-                  key={code} 
-                  value={code} 
-                  {...barcodeOptions} 
-                  fontSize={fontSize}
-                  textMargin={textMargin}
-                  marginTop={marginTop}
-                  text={word}
-                />
-              </div>
-          }
-        }) }
+        {this.renderBarcode(item.code)}
       </li>
     })
   }
 
   render() {
     return <div>
-      { this.collisionWarning(this.props.data) }
+      { /* this.collisionWarning(this.props.data) */ }
+      <p>Use mouse pointer to simulate code scanning</p>
       <ul className="barcodes-container">{ this.listItems() }</ul>
       </div>
   }
