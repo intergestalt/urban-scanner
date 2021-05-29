@@ -24,9 +24,6 @@ export default function(props) {
       <b>{p.personalityTitle}</b><br />
       {p.personalityText}<br />
     </p>
-    <p style={{textAlign: "center"}}>
-      {p.last}
-    </p>
     <p>
       {p.end}<br /><br />
     </p>

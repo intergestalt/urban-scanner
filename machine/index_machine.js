@@ -75,7 +75,7 @@ function onCodeReceived(code) {
     })
     .then(res => res.json())
     .then(json => {
-      const textParts = (json && json[1]) ? json : null
+      const textParts = (json && json.uid) ? json : null
       if (textParts) {
         if (headerTimeout) clearTimeout(headerTimeout)
         printReceipt(textParts)
@@ -88,6 +88,8 @@ function onCodeReceived(code) {
 function printReceipt(textParts) {
 
   printer.print(_.init())
+
+  /*
   printer.print(_.align(1))
 
   printer.print(textParts.first)
@@ -99,64 +101,75 @@ function printReceipt(textParts) {
   printer.printLn()
 
   printer.print(_.align(0))
+  */
 
   printer.print(_.bold(1))
-  printer.print(sentenceTitles[1])
+  printer.print(textParts.intro1)
   printer.print(_.bold(0))
   printer.printLn()
   printer.printLn()
-  printer.print(textParts[1])
-  printer.printLn()
-  printer.printLn()
-
-  printer.print(_.bold(1))
-  printer.print(sentenceTitles[2])
-  printer.print(_.bold(0))
-  printer.printLn()  
-  printer.printLn()
-  printer.print(textParts[2])
+  printer.print(textParts.intro2)
   printer.printLn()
   printer.printLn()
 
   printer.print(_.bold(1))
-  printer.print(sentenceTitles[3])
+  printer.print(textParts.fiction1Title)
   printer.print(_.bold(0))
   printer.printLn()
-  printer.printLn()  
-  printer.print(textParts[3])
+  printer.printLn()
+  printer.print(textParts.fiction1Text)
+  printer.printLn()
+  printer.printLn()
+
+  printer.print(_.bold(1))
+  printer.print(textParts.fiction2Title)
+  printer.print(_.bold(0))
+  printer.printLn()
+  printer.printLn()
+  printer.print(textParts.fiction2Text)
+  printer.printLn()
+  printer.printLn()
+
+  printer.print(_.bold(1))
+  printer.print(textParts.fiction3Title)
+  printer.print(_.bold(0))
+  printer.printLn()
+  printer.printLn()
+  printer.print(textParts.fiction3Text)
+  printer.printLn()
+  printer.printLn()
+
+  printer.print(textParts.mid)
   printer.printLn()
   printer.printLn()  
 
   printer.print(_.bold(1))
-  printer.print(sentenceTitles[4])
+  printer.print(textParts.fiction3Title)
   printer.print(_.bold(0))
   printer.printLn()
-  printer.printLn()  
-  printer.print(textParts[4])
   printer.printLn()
-  printer.printLn()  
+  printer.print(textParts.fiction3Text)
+  printer.printLn()
+  printer.printLn()
 
   printer.print(_.bold(1))
-  printer.print(sentenceTitles[5])
+  printer.print(textParts.personalityTitle)
   printer.print(_.bold(0))
   printer.printLn()
+  printer.printLn()  
+  printer.print(textParts.personalityText)
   printer.printLn()
-  printer.print(textParts[5])
+  printer.printLn()  
+
+  printer.print(textParts.end)
   printer.printLn()
   printer.printLn()
 
-  printer.print(_.align(1))
-
-  printer.print(textParts.nexttolast)
-  printer.printLn()
-  printer.print(textParts.last)
+  printer.print(textParts.date)
+  printer.print(" ")
+  printer.print(textParts.coordinates)
   printer.printLn()
   printer.printLn()
-  printer.print(textParts.announcement)
-  printer.printLn()
-  printer.printLnLn()
-
-  printer.print(_.align(0))
 }
 
 function printHeader() {
