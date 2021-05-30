@@ -4,6 +4,7 @@ import { generateShorthand } from '../../../api/shared'
 import Editor from './Editor.js'
 import Barcodes from './Barcodes.js'
 import Printout from './Printout.js'
+import Stats from './Stats.js'
 import Toggle from 'react-toggle'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'react-toggle/style.css'
@@ -184,6 +185,7 @@ class App extends React.Component {
               />
             :
               <div>
+                <Stats host={host} />
                 <Barcodes 
                   data={this.state.data.fictions}
                   onInput={this.handleCodeInput}

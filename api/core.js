@@ -29,15 +29,7 @@ const inputCode = function(code) {
 const countOccurrences = (arr, val) => arr.reduce((a, v) => (v === val ? a + 1 : a), 0);
 const sum = (array) => array.reduce(function (a, b) {return a + b;}, 0);
 
-const generateTextParts = function() {
-  console.log("codes complete, generating text", currentCodes)
-
-  const scenario1 = storage.getScenarioByCode(currentCodes[0])
-  const scenario2 = storage.getScenarioByCode(currentCodes[1])
-  const scenario3 = storage.getScenarioByCode(currentCodes[2])
-  const scenario4 = storage.getScenarioByCode(currentCodes[3])
-  const scenario5 = storage.getScenarioByCode(currentCodes[4])
-
+const algorithm = function(scenarios, personalities) {
   // BEGIN ALGORITHM
   // 1 - get fiction keywords
   // 2 - get personalities keywords
@@ -48,24 +40,51 @@ const generateTextParts = function() {
   //       add the numbers together
   //       mark this personality as top match if it has the highest score so far
 
-  const fictionWords = [...scenario1.words, ...scenario2.words, ...scenario3.words, ...scenario4.words, ...scenario5.words ].map(w => w && w.toUpperCase().trim())
+  const fictionWords = [scenarios[0], ...scenarios, scenarios[scenarios.length-1]] // add first and last twice
+    .reduce((res,s) => res.concat(s.words), [])
+    .map(w => w && w.toUpperCase().trim())
   console.log("Scanned keywords: " + fictionWords)
 
-  const personalities = storage.getData().personalities
   let matchedPersonality = {}
   let topScore = -1
 
   for (let personality of personalities) {
-    let score = sum(personality.words.map(w => countOccurrences(fictionWords, w)))
+    let score = sum(personality.words.map(w => w && w.toUpperCase().trim()).map(w => countOccurrences(fictionWords, w)))
+    console.log("score: " + score + " for " + personality.title)
     if (score > topScore) {
       matchedPersonality = personality
       topScore = score
     }
   }
 
-  console.log("matched personality: ", matchedPersonality.title)
-
   // END ALGORITHM
+
+  return matchedPersonality
+}
+
+const generateTextParts = function() {
+  console.log("codes complete, generating text", currentCodes)
+
+  const scenario1 = storage.getScenarioByCode(currentCodes[0])
+  const scenario2 = storage.getScenarioByCode(currentCodes[1])
+  const scenario3 = storage.getScenarioByCode(currentCodes[2])
+  const scenario4 = storage.getScenarioByCode(currentCodes[3])
+  const scenario5 = storage.getScenarioByCode(currentCodes[4])
+
+  const personalities = storage.getData().personalities
+
+  const matchedPersonality = algorithm(
+    [
+      scenario1,
+      scenario2,
+      scenario3,
+      scenario4,
+      scenario5
+    ],
+    personalities
+  )
+
+  console.log("matched personality: ", matchedPersonality.title)
 
   let parts = {
     intro1: storage.getData().intro1,
@@ -106,6 +125,7 @@ const resetCodes = function() {
 }
 
 module.exports = {
-  inputCode  
+  inputCode,
+  algorithm
 }
 

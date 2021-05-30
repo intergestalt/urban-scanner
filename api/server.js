@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const storage = require('./storage.js')
 const core = require('./core.js')
+const stats = require('./stats.js')
 
 port = process.env.PORT || 80
 
@@ -39,6 +40,14 @@ app.post('/code/', function (req, res) {
   res.setHeader('Content-Type', 'application/json')
   console.log("received code", req.body)
   const result = core.inputCode(req.body.code) || {}
+  res.end(JSON.stringify(result))
+});
+
+// serve statistics
+app.get('/stats/', function (req, res) {
+  res.setHeader('Content-Type', 'application/json')
+  console.log("received stats request")
+  const result = stats.runAlgoTests(storage.getData()).stats
   res.end(JSON.stringify(result))
 });
 
