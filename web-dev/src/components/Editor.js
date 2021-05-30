@@ -127,7 +127,7 @@ const UISchema = {
         classNames: "foo",
       },
       text: {
-        //"ui:widget": "textarea",
+        "ui:widget": "textarea",
       },
       words: {
         classNames: "bar",
@@ -151,7 +151,7 @@ const UISchema = {
         classNames: "foo",
       },
       text: {
-        //"ui:widget": "textarea",
+        "ui:widget": "textarea",
       },
       words: {
         classNames: "bar",
