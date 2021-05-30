@@ -8,7 +8,8 @@ const ip = require('ip');
 const { sentenceTitles, dateOptions, getLines } = require('../config')
 
 const _ = {
-  init: () => `\x1b@`, 
+  init: () => `\x1b@`,
+  heat: (n1,n2,n3) => `\x1b\x37\x09\x80\xdd`, 
   bold: n => `\x1b\x45${n}`, // 1=bold, 0=normal
   align: n => `\x1b\x61${n}`, // 0=left, 1=middle, 2=right
 }
@@ -88,6 +89,7 @@ function onCodeReceived(code) {
 function printReceipt(textParts) {
 
   printer.print(_.init())
+  //printer.print(_.heat())
 
   /*
   printer.print(_.align(1))
@@ -142,15 +144,6 @@ function printReceipt(textParts) {
   printer.print(textParts.mid)
   printer.printLn()
   printer.printLn()  
-
-  printer.print(_.bold(1))
-  printer.print(textParts.fiction3Title)
-  printer.print(_.bold(0))
-  printer.printLn()
-  printer.printLn()
-  printer.print(textParts.fiction3Text)
-  printer.printLn()
-  printer.printLn()
 
   printer.print(_.bold(1))
   printer.print(textParts.personalityTitle)
