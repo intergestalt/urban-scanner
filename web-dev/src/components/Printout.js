@@ -16,6 +16,10 @@ export default function(props) {
       {p.fiction2Text}<br /><br />
       <b>{p.fiction3Title}</b><br />
       {p.fiction3Text}<br /><br />
+      <b>{p.fiction4Title}</b><br />
+      {p.fiction4Text}<br /><br />
+      <b>{p.fiction5Title}</b><br />
+      {p.fiction5Text}<br /><br />
     </p>
     <p>
       {p.mid}<br />

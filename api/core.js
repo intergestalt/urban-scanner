@@ -19,7 +19,7 @@ const inputCode = function(code) {
     console.log("ignoring code, already in list", code)
   }
   if (autoResetTimer) { clearTimeout(autoResetTimer) }
-  if (currentCodes.length >= 3) {
+  if (currentCodes.length >= 5) {
     return generateTextParts()
   } else {
     autoResetTimer = setTimeout(resetCodes, resetTimeMS)
@@ -35,6 +35,8 @@ const generateTextParts = function() {
   const scenario1 = storage.getScenarioByCode(currentCodes[0])
   const scenario2 = storage.getScenarioByCode(currentCodes[1])
   const scenario3 = storage.getScenarioByCode(currentCodes[2])
+  const scenario4 = storage.getScenarioByCode(currentCodes[3])
+  const scenario5 = storage.getScenarioByCode(currentCodes[4])
 
   // BEGIN ALGORITHM
   // 1 - get fiction keywords
@@ -46,7 +48,7 @@ const generateTextParts = function() {
   //       add the numbers together
   //       mark this personality as top match if it has the highest score so far
 
-  const fictionWords = [...scenario1.words, ...scenario2.words, ...scenario3.words ].map(w => w && w.toUpperCase().trim())
+  const fictionWords = [...scenario1.words, ...scenario2.words, ...scenario3.words, ...scenario4.words, ...scenario5.words ].map(w => w && w.toUpperCase().trim())
   console.log("Scanned keywords: " + fictionWords)
 
   const personalities = storage.getData().personalities
@@ -68,12 +70,19 @@ const generateTextParts = function() {
   let parts = {
     intro1: storage.getData().intro1,
     intro2: storage.getData().intro2,
+
     fiction1Title: storage.getScenarioByCode(currentCodes[0]).title/*.toUpperCase()*/,
     fiction2Title: storage.getScenarioByCode(currentCodes[1]).title/*.toUpperCase()*/,
     fiction3Title: storage.getScenarioByCode(currentCodes[2]).title/*.toUpperCase()*/,
+    fiction4Title: storage.getScenarioByCode(currentCodes[3]).title/*.toUpperCase()*/,
+    fiction5Title: storage.getScenarioByCode(currentCodes[4]).title/*.toUpperCase()*/,
+
     fiction1Text:  storage.getScenarioByCode(currentCodes[0]).text/*.toUpperCase()*/,
     fiction2Text:  storage.getScenarioByCode(currentCodes[1]).text/*.toUpperCase()*/,
     fiction3Text:  storage.getScenarioByCode(currentCodes[2]).text/*.toUpperCase()*/,
+    fiction4Text:  storage.getScenarioByCode(currentCodes[3]).text/*.toUpperCase()*/,
+    fiction5Text:  storage.getScenarioByCode(currentCodes[4]).text/*.toUpperCase()*/,
+
     personalityTitle: matchedPersonality.title,
     personalityText: matchedPersonality.text,
     mid: storage.getData().mid,

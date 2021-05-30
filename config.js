@@ -11,7 +11,7 @@ const dateFormat = require('dateformat');
 //const weekdays = ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"]
 
 const getLines = date => ({
-  header: "----- 3 BARCODES SCANNEN -----",
+  header: "----- 5 BARCODES SCANNEN -----",
   //first: "*** Fiction Forum ***".toUpperCase(),
   //second: "F-U-T-U-R-E T-O G-O",
   //third: dateFormat(date, "XX dd.mm.yyyy HH:MM").replace("XX", XX => weekdays[date.getDay()]).toUpperCase(),
