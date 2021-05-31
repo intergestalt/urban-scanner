@@ -114,7 +114,7 @@ async function printReceipt(textParts) {
   printer.printLn()
   printer.printLn()
 
-  await printer.sleep(1000)
+  await printer.sleep(2000)
 
   printer.print(_.bold(1))
   printer.print(textParts.fiction1Title)
@@ -125,7 +125,7 @@ async function printReceipt(textParts) {
   printer.printLn()
   printer.printLn()
 
-  await printer.sleep(2000)
+  await printer.sleep(4000)
 
   printer.print(_.bold(1))
   printer.print(textParts.fiction2Title)
@@ -136,7 +136,7 @@ async function printReceipt(textParts) {
   printer.printLn()
   printer.printLn()
 
-  await printer.sleep(2000)
+  await printer.sleep(4000)
 
   printer.print(_.bold(1))
   printer.print(textParts.fiction3Title)
@@ -147,7 +147,7 @@ async function printReceipt(textParts) {
   printer.printLn()
   printer.printLn()
 
-  await printer.sleep(2000)
+  await printer.sleep(4000)
 
   printer.print(_.bold(1))
   printer.print(textParts.fiction4Title)
@@ -158,7 +158,7 @@ async function printReceipt(textParts) {
   printer.printLn()
   printer.printLn()
 
-  await printer.sleep(2000)
+  await printer.sleep(4000)
 
   printer.print(_.bold(1))
   printer.print(textParts.fiction5Title)
@@ -169,13 +169,13 @@ async function printReceipt(textParts) {
   printer.printLn()
   printer.printLn()
 
-  await printer.sleep(2000)
+  await printer.sleep(4000)
 
   printer.print(textParts.mid)
   printer.printLn()
   printer.printLn()  
 
-  await printer.sleep(1000)
+  await printer.sleep(2000)
 
   printer.print(_.bold(1))
   printer.print(textParts.personalityTitle)
@@ -186,7 +186,7 @@ async function printReceipt(textParts) {
   printer.printLn()
   printer.printLn()  
 
-  await printer.sleep(2000)
+  await printer.sleep(4000)
 
   printer.print(textParts.end)
   printer.printLn()
