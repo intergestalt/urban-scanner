@@ -33,10 +33,15 @@ const printFeedSharp = function(text = "", style={}) {
   return print(text + "\n\n\n\n")
 }
 
+const sleep = async function(milliseconds) {
+  return new Promise(resolve => setTimeout(resolve, milliseconds));
+}
+
 module.exports = {
   init,
   print,
   printLn,
   printLnLn,
-  printFeedSharp
+  printFeedSharp,
+  sleep
 }

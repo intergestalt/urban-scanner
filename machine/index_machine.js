@@ -55,7 +55,7 @@ headerTimeout = setTimeout(printHeader, 20000)
 
 console.info(welcomeMessage)
 
-function onCodeReceived(code) {
+async function onCodeReceived(code) {
   if (code === "POWEROFF") {
     printer.printLnLn("Bye bye. Bitte warten Sie 10 Sekunden, bevor Sie den Stecker ziehen. Vielen Dank.")
     execSync("poweroff")
@@ -79,14 +79,14 @@ function onCodeReceived(code) {
       const textParts = (json && json.uid) ? json : null
       if (textParts) {
         if (headerTimeout) clearTimeout(headerTimeout)
-        printReceipt(textParts)
+        await printReceipt(textParts)
         headerTimeout = setTimeout(printHeader, 60000)
       }    
     });
   }
 }
 
-function printReceipt(textParts) {
+async function printReceipt(textParts) {
 
   printer.print(_.init())
   //printer.print(_.heat())
@@ -114,6 +114,8 @@ function printReceipt(textParts) {
   printer.printLn()
   printer.printLn()
 
+  await sleep(1000)
+
   printer.print(_.bold(1))
   printer.print(textParts.fiction1Title)
   printer.print(_.bold(0))
@@ -122,6 +124,8 @@ function printReceipt(textParts) {
   printer.print(textParts.fiction1Text)
   printer.printLn()
   printer.printLn()
+
+  await sleep(2000)
 
   printer.print(_.bold(1))
   printer.print(textParts.fiction2Title)
@@ -132,6 +136,8 @@ function printReceipt(textParts) {
   printer.printLn()
   printer.printLn()
 
+  await sleep(2000)
+
   printer.print(_.bold(1))
   printer.print(textParts.fiction3Title)
   printer.print(_.bold(0))
@@ -140,6 +146,8 @@ function printReceipt(textParts) {
   printer.print(textParts.fiction3Text)
   printer.printLn()
   printer.printLn()
+
+  await sleep(2000)
 
   printer.print(_.bold(1))
   printer.print(textParts.fiction4Title)
@@ -150,6 +158,8 @@ function printReceipt(textParts) {
   printer.printLn()
   printer.printLn()
 
+  await sleep(2000)
+
   printer.print(_.bold(1))
   printer.print(textParts.fiction5Title)
   printer.print(_.bold(0))
@@ -159,9 +169,13 @@ function printReceipt(textParts) {
   printer.printLn()
   printer.printLn()
 
+  await sleep(2000)
+
   printer.print(textParts.mid)
   printer.printLn()
   printer.printLn()  
+
+  await sleep(1000)
 
   printer.print(_.bold(1))
   printer.print(textParts.personalityTitle)
@@ -171,6 +185,8 @@ function printReceipt(textParts) {
   printer.print(textParts.personalityText)
   printer.printLn()
   printer.printLn()  
+
+  await sleep(2000)
 
   printer.print(textParts.end)
   printer.printLn()
