@@ -75,7 +75,7 @@ async function onCodeReceived(code) {
       headers: { 'Content-Type': 'application/json' },
     })
     .then(res => res.json())
-    .then(json => {
+    .then(async json => {
       const textParts = (json && json.uid) ? json : null
       if (textParts) {
         if (headerTimeout) clearTimeout(headerTimeout)
