@@ -86,6 +86,8 @@ async function onCodeReceived(code) {
   }
 }
 
+const millisPerCharacter = 3
+
 async function printReceipt(textParts) {
 
   printer.print(_.init())
@@ -114,7 +116,7 @@ async function printReceipt(textParts) {
   printer.printLn()
   printer.printLn()
 
-  await printer.sleep(2000)
+  await printer.sleep(millisPerCharacter * textParts.intro2.length)
 
   printer.print(_.bold(1))
   printer.print(textParts.fiction1Title)
@@ -125,7 +127,7 @@ async function printReceipt(textParts) {
   printer.printLn()
   printer.printLn()
 
-  await printer.sleep(4000)
+  await printer.sleep(millisPerCharacter * textParts.fiction1Text.length)
 
   printer.print(_.bold(1))
   printer.print(textParts.fiction2Title)
@@ -136,7 +138,7 @@ async function printReceipt(textParts) {
   printer.printLn()
   printer.printLn()
 
-  await printer.sleep(4000)
+  await printer.sleep(millisPerCharacter * textParts.fiction2Text.length)
 
   printer.print(_.bold(1))
   printer.print(textParts.fiction3Title)
@@ -147,7 +149,7 @@ async function printReceipt(textParts) {
   printer.printLn()
   printer.printLn()
 
-  await printer.sleep(4000)
+  await printer.sleep(millisPerCharacter * textParts.fiction3Text.length)
 
   printer.print(_.bold(1))
   printer.print(textParts.fiction4Title)
@@ -158,7 +160,7 @@ async function printReceipt(textParts) {
   printer.printLn()
   printer.printLn()
 
-  await printer.sleep(4000)
+  await printer.sleep(millisPerCharacter * textParts.fiction4Text.length)
 
   printer.print(_.bold(1))
   printer.print(textParts.fiction5Title)
@@ -169,13 +171,13 @@ async function printReceipt(textParts) {
   printer.printLn()
   printer.printLn()
 
-  await printer.sleep(4000)
+  await printer.sleep(millisPerCharacter * textParts.fiction5Text.length)
 
   printer.print(textParts.mid)
   printer.printLn()
   printer.printLn()  
 
-  await printer.sleep(2000)
+  await printer.sleep(millisPerCharacter * textParts.mid.length)
 
   printer.print(_.bold(1))
   printer.print(textParts.personalityTitle)
@@ -186,7 +188,7 @@ async function printReceipt(textParts) {
   printer.printLn()
   printer.printLn()  
 
-  await printer.sleep(4000)
+  await printer.sleep(millisPerCharacter * textParts.personalityText.length)
 
   printer.print(textParts.end)
   printer.printLn()
