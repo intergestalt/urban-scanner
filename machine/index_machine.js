@@ -86,7 +86,7 @@ async function onCodeReceived(code) {
   }
 }
 
-const millisPerCharacter = 9
+const millisPerCharacter = 10
 
 async function printReceipt(textParts) {
 
